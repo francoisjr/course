@@ -4,11 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class User implements Serializable {
+public class UserEntity {
 
     private static final Long serialVersionUID = 1L;
 
@@ -20,10 +19,10 @@ public class User implements Serializable {
     private String phone;
     private String password;
 
-    public User() {
+    public UserEntity() {
     }
 
-    public User(Long id, String name, String email, String phone, String password) {
+    public UserEntity(Long id, String name, String email, String phone, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -75,7 +74,7 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        UserEntity user = (UserEntity) o;
         return id.equals(user.id);
     }
 
