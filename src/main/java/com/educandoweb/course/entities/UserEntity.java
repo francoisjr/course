@@ -1,5 +1,7 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class UserEntity {
     private String email;
     private String phone;
     private String password;
+
 
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
