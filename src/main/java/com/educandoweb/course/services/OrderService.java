@@ -1,7 +1,7 @@
 package com.educandoweb.course.services;
 
 import com.educandoweb.course.entities.OrderEntity;
-import com.educandoweb.course.entities.UserEntity;
+import com.educandoweb.course.entities.CategoryEntity;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
