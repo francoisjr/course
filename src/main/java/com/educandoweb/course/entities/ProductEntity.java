@@ -1,5 +1,7 @@
 package com.educandoweb.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -24,6 +26,9 @@ public class ProductEntity implements Serializable {
     @JoinTable(name = "tb_product_category",
             joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<CategoryEntity> categories = new HashSet<>();
+
+    @OneToMany(mappedBy = "id.productEntity")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public ProductEntity() {
     }
@@ -78,6 +83,15 @@ public class ProductEntity implements Serializable {
 
     public Set<CategoryEntity> getCategories() {
         return categories;
+    }
+
+    @JsonIgnore
+    public Set<OrderEntity> getOrders(){
+        Set<OrderEntity> set = new HashSet<>();
+        for(OrderItemEntity x : items){
+            set.add(x.getOrder());
+        }
+        return set;
     }
 
     @Override
