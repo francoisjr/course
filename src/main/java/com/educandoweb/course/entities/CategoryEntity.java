@@ -2,7 +2,9 @@ package com.educandoweb.course.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -14,9 +16,10 @@ public class CategoryEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Transient
+    private Set<ProductEntity> products = new HashSet<>();
 
-    public CategoryEntity() {
-    }
+    public CategoryEntity() { }
 
     public CategoryEntity(Long id, String name) {
         this.id = id;
@@ -37,6 +40,10 @@ public class CategoryEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
 
     @Override
