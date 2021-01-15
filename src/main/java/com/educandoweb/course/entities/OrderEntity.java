@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_order")
@@ -18,6 +20,7 @@ public class OrderEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
 
@@ -26,6 +29,9 @@ public class OrderEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private UserEntity client;
+
+    @OneToMany(mappedBy = "id.orderEntity")
+    private Set<OrderItemEntity> items = new HashSet<>();
 
     public OrderEntity() {
     }
@@ -70,6 +76,8 @@ public class OrderEntity implements Serializable {
             this.orderStatus = orderStatus.getCode();
         }
     }
+
+    public Set<OrderItemEntity> getItems(){return items; }
 
     @Override
     public boolean equals(Object o) {

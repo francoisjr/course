@@ -3,13 +3,14 @@ package com.educandoweb.course.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user")
-public class UserEntity {
+public class UserEntity implements Serializable {
 
     private static final Long serialVersionUID = 1L;
 
@@ -21,7 +22,7 @@ public class UserEntity {
     private String phone;
     private String password;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<OrderEntity> orders = new ArrayList<>();
 
